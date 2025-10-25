@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Pengiriman - SIITA UT</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="halaman-tracking">
+
+    <header class="header">
+        <img src="assets/logo UT.png" alt="Logo UT" class="logo-header">
+        <div class="judul-stock">
+            <h1>Tracking Pengiriman</h1>
+            <h4>Lacak status pengiriman bahan ajar Anda secara real-time. <br>Pastikan bahan ajar Anda sampai tujuan tepat waktu dengan fitur pelacakan SITTA.</h4>
+            <p><br></p>
+        </div>
+        <a href="dashboard.html" class="tombol-kembali">Kembali ke dashboard</a>
+    </header>
+    
+    <main class="konten-tracking">
+        <section class="pencarian-tracking">
+            <h1>Cari Status Pengiriman Anda</h1>
+            <form id="form-tracking">
+                <div class="kelompok-input">
+                    <label for="nomor-do">Masukan Nomor Delivery Order</label>
+                    <input type="text" id="nomor-do" name="nomor-do" placeholder="nomor DO">
+                </div>
+                <button type="submit" class="tombol-utama" onclick="caridatatracking()">Cek Pengiriman</button>
+            </form>
+        </section>
+        
+        <section id="hasil-tracking" class="hasil-tracking" style="display: none;">
+            <h2>Detail Pengiriman</h2>
+            <div id="detail-pengiriman"></div>
+        </section>
+    </main>
+    
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
