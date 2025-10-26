@@ -630,16 +630,91 @@ input:hover{ background-color: rgb(220, 219, 219);}
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    /* Desktop kecil / Tablet landscape */
+    .konten-modal {
+        max-width: 80%;
+        margin: 80px auto;
+        padding: 25px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Tablet */
+    .konten-modal {
+        max-width: 85%;
+        margin: 60px auto;
+        padding: 20px;
+    }
+    
+    .form-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+    }
+    
+    .kartu-menu {
+        padding: 15px;
+    }
+}
+
 @media (max-width: 768px) {
+    /* Tablet kecil / HP landscape */
+    .modal {
+        padding-top: 30px;
+    }
+    
+    .konten-modal {
+        max-width: 90%;
+        margin: 40px auto;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .tutup-modal {
+        font-size: 20px;
+        top: 10px;
+        right: 15px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .gambar-buku {
+        height: 150px;
+    }
+    
+    .kartu-menu h2 {
+        font-size: 16px;
+    }
+    
+    .keterangan-produk {
+        font-size: 12px;
+    }
+    
     .pencarian-tracking, .hasil-tracking {
         width: 95%;
-        padding: 20px;
+        padding: 15px;
     }
     
     .header {
         flex-direction: column;
         gap: 15px;
-        text-align: center;
+        text-align: left;
+        padding: 15px;
     }
     
     .info-pengiriman p {
@@ -650,5 +725,206 @@ input:hover{ background-color: rgb(220, 219, 219);}
     
     .info-pengiriman strong {
         min-width: auto;
+    }
+    
+    /* Modal tambah buku responsive */
+    #modal-tambah-buku .konten-modal {
+        max-width: 95%;
+        margin: 20px auto;
+    }
+    
+    #isi-detail-produk {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #cover-detail {
+        width: 100%;
+        text-align: center;
+    }
+    
+    #cover-detail img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* HP */
+    .modal {
+        padding-top: 20px;
+    }
+    
+    .konten-modal {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .kartu-menu {
+        padding: 12px;
+    }
+    
+    .gambar-buku {
+        height: 120px;
+    }
+    
+    .tombol-utama, .tombol-primer {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .kontrol-stok {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .tombol-tambah-buku, .tombol-kembali {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    /* Form dalam modal */
+    .konten-modal input[type="text"],
+    .konten-modal input[type="email"],
+    .konten-modal input[type="password"],
+    .konten-modal select {
+        padding: 12px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Footer login responsive */
+    .footer-login {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .footer-login .left,
+    .footer-login .right {
+        text-align: center;
+    }
+    
+    /* Navigasi dashboard responsive */
+    .navigasi-dashboard {
+        flex-direction: column;
+    }
+    
+    .menu-dashboard {
+        flex-direction: column;
+    }
+    
+    .menu-dashboard a {
+        padding: 12px 15px;
+        text-align: center;
+    }
+    
+    .submenu-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+    
+    .konten-tracking{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 50%;
+        min-height: 20%;
+        padding: 20px;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 375px) {
+    /* HP kecil */
+    .konten-modal {
+        max-width: 98%;
+        margin: 10px auto;
+        padding: 12px;
+    }
+    
+    .container-login {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    input {
+        width: 100%;
+    }
+    
+    .konten-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo-header {
+        width: 20%;
+        top: 15%;
+        right: 20px;
+    }
+
+    .konten-tracking{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 50%;
+        min-height: 20%;
+        padding: 20px;
+        gap: 30px;
+    }
+}
+
+@keyframes modalopen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Pastikan modal bisa di-scroll di HP */
+@media (max-height: 600px) {
+    .modal {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .konten-modal {
+        margin: 10px auto;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+}
+
+/* Perbaikan untuk timeline di HP */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 8px;
+    }
+    
+    .timeline-item {
+        padding-left: 25px;
+    }
+    
+    .timeline-marker {
+        left: -8px;
+        width: 16px;
+        height: 16px;
+    }
+    
+    .timeline-content {
+        margin-left: 15px;
+    }
+    
+    .timeline-waktu {
+        font-size: 16px;
     }
 }
