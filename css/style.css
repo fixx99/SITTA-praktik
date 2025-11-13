@@ -172,8 +172,9 @@ input:hover{ background-color: rgb(220, 219, 219);}
 }
 
 .logo-header{
-    width: 10%;
-    max-width: 50%;
+    width: 130px;
+    max-width: 130px;
+    height: auto;
     position: absolute;
     top: 18%;
     right: 50px;
@@ -187,7 +188,7 @@ input:hover{ background-color: rgb(220, 219, 219);}
     padding: 20px;
 }
 
-.judul-dashboardh1{margin-bottom: 5px;}
+.judul-stok, .judul-dashboard h1{margin-bottom: 5px;}
 
 .tombol-keluar{
     background-color: #ea1f08;
@@ -400,11 +401,17 @@ input:hover{ background-color: rgb(220, 219, 219);}
 
 .form-grid {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 15px;
+    grid-template-columns: 1fr 1fr;
 }
 
-.form-kolom {flex: 1;}
+.form-kolom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 #modal-tambah-buku input:not([type="submit"]),
 #modal-tambah-buku select {
@@ -449,7 +456,7 @@ input:hover{ background-color: rgb(220, 219, 219);}
 }
 
 /* Style untuk input file */
-.kelompok-input input[type="file"] {
+.kelompok-input input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -458,8 +465,39 @@ input:hover{ background-color: rgb(220, 219, 219);}
     cursor: pointer;
 }
 
-.kelompok-input input[type="file"]:hover {
+.kelompok-input input[type="text"]:hover {
     background-color: #f0f0f0;
+}
+
+.kelompok-input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.kelompok-input label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.kelompok-input textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.kelompok-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box; /* Penting untuk width 100% */
 }
 
 /* Style untuk preview gambar */
@@ -475,10 +513,129 @@ input:hover{ background-color: rgb(220, 219, 219);}
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Filter Section */
+.filter-section {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+}
+
+.detail-content {
+    margin-top: 20px;
+}
+
+.detail-info-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-actions{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.detail-actions .tombol-utama, 
+.detail-actions .tombol-keluar {
+    flex: 1;
+    width: auto;
+    margin-bottom: 0;
+}
+
+.info-group {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.info-group strong {
+    color: #333;
+    min-width: 120px;
+}
+
+/* Status Stok */
+.status-aman {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-menipis {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-kosong {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.tombol-tutup:hover {
+    background: #5a6268;
+}
+
+/* Status Form Styles */
+.status-info {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-siap {
+    color: #155724;
+}
+
+.status-tunggu {
+    color: #856404;
+}
+
+.status-error {
+    color: #721c24;
+}
+
 /* Halaman Tracking */
 .konten-tracking{
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 50%;
@@ -491,7 +648,7 @@ input:hover{ background-color: rgb(220, 219, 219);}
     background-color: #ffffff(255, 255, 255);
     width: 500px;
     max-width: 600px;
-    padding: 10px;
+    padding: 25px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(175, 166, 36);
     text-align: center;
@@ -499,8 +656,7 @@ input:hover{ background-color: rgb(220, 219, 219);}
     margin: auto;
 }
 
-/*hasil tracking*/
-/* Notifikasi Data Tidak Ditemukan */
+/* hasil tracking*/
 .hasil-tracking{text-align: justify;}
 
 .hasil-tracking h2 {
@@ -647,6 +803,12 @@ input:hover{ background-color: rgb(220, 219, 219);}
 
 @media (max-width: 992px) {
     /* Tablet */
+    .header{
+        padding: 25px;
+        gap: 15px;
+        font-size: 14px;
+    }
+    
     .konten-modal {
         max-width: 85%;
         margin: 60px auto;
@@ -670,6 +832,31 @@ input:hover{ background-color: rgb(220, 219, 219);}
 
 @media (max-width: 768px) {
     /* Tablet kecil / HP landscape */
+    .header {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 15px;
+        text-align: left;
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .logo-header{
+        width: 100px; 
+        order: 1;
+    }
+
     .modal {
         padding-top: 30px;
     }
@@ -710,13 +897,6 @@ input:hover{ background-color: rgb(220, 219, 219);}
         padding: 15px;
     }
     
-    .header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: left;
-        padding: 15px;
-    }
-    
     .info-pengiriman p {
         flex-direction: column;
         align-items: flex-start;
@@ -750,6 +930,29 @@ input:hover{ background-color: rgb(220, 219, 219);}
 
 @media (max-width: 576px) {
     /* HP */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+        gap: 10px;
+    }
+
+    .logo-header{
+        width: 80px; 
+        order: 1;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
     .modal {
         padding-top: 20px;
     }
@@ -779,6 +982,8 @@ input:hover{ background-color: rgb(220, 219, 219);}
         width: 100%;
         padding: 10px;
     }
+
+    .detail-actions{flex-direction: column;}
     
     .kontrol-stok {
         flex-direction: column;
@@ -847,6 +1052,31 @@ input:hover{ background-color: rgb(220, 219, 219);}
 
 @media (max-width: 375px) {
     /* HP kecil */
+    .header{
+        padding: 10px 8px;
+    }
+
+    .logo-header{
+        width: 70px; 
+        order: 1;
+    }
+
+    .tombol-keluar, .tombol-kembali{
+        display: flex;
+        padding: 8px 10px;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
     .konten-modal {
         max-width: 98%;
         margin: 10px auto;
