@@ -1,2 +1,2 @@
 # SITTA-praktik
-praktik membuat web SITTA sebagai tugas 1 matakuliah PWB MSIM4309 UT
+praktik membuat web SITTA sebagai tugas matakuliah PWB MSIM4309 UT
