@@ -1,0 +1,301 @@
+{
+    "pengguna": [
+        {
+        "id": 1,
+        "nama": "Rina Wulandari",
+        "email": "rina@ut.ac.id",
+        "password": "rina123",
+        "role": "UPBJJ-UT",
+        "lokasi": "UPBJJ Jakarta"
+        },
+        {
+        "id": 2,
+        "nama": "Agus Pranoto",
+        "email": "agus@ut.ac.id",
+        "password": "agus123",
+        "role": "UPBJJ-UT",
+        "lokasi": "UPBJJ Makassar"
+        },
+        {
+        "id": 3,
+        "nama": "Siti Marlina",
+        "email": "siti@ut.ac.id",
+        "password": "siti123",
+        "role": "Puslaba",
+        "lokasi": "Pusat"
+        },
+        {
+        "id": 4,
+        "nama": "Doni Setiawan",
+        "email": "doni@ut.ac.id",
+        "password": "doni123",
+        "role": "Fakultas",
+        "lokasi": "FISIP"
+        },
+        {
+        "id": 5,
+        "nama": "Admin SITTA",
+        "email": "admin@ut.ac.id",
+        "password": "admin123",
+        "role": "Administrator",
+        "lokasi": "Pusat"
+        }
+    ],
+    "list": {
+        "upbjjList": ["Jakarta", "Surabaya", "Makassar", "Padang", "Denpasar"],
+        "kategoriList": ["MK Wajib", "MK Pilihan", "Praktikum", "Problem-Based"],
+        "pengirimanList": [
+        {"kode": "REG", "nama": "Reguler (3-5 hari)"},
+        {"kode": "EXP", "nama": "Ekspres (1-2 hari)"}
+        ],
+        "ekspedisiList": [
+        {"kode": "JNE_REG", "nama": "JNE Regular"},
+        {"kode": "JNE_EXP", "nama": "JNE Express"},
+        {"kode": "POS_REG", "nama": "Pos Indonesia Regular"},
+        {"kode": "POS_KILAT", "nama": "Pos Indonesia Kilat"}
+        ]
+    },
+    "paket": [
+        {
+            "kode": "PAKET-UT-001",
+            "nama": "PAKET IPS Dasar",
+            "isi": [
+                "EKMA4116",
+                "EKMA4115"
+            ],
+            "harga": 120000
+        },
+        {
+            "kode": "PAKET-UT-002",
+            "nama": "PAKET IPA Dasar",
+            "isi": [
+                "BIOL4201",
+                "FISIP4001"
+            ],
+            "harga": 140000
+        }
+    ],
+    "stok": [
+        {
+            "gambar": "../assets/img/Pengantar manajemen EKMA411603.jpg",
+            "kode": "EKMA4116",
+            "judul": "Pengantar Manajemen",
+            "kategori": "MK Wajib",
+            "edisi": "-",
+            "upbjj": "Jakarta",
+            "lokasiRak": "R1-A3",
+            "harga": 65000,
+            "qty": 28,
+            "safety": 20,
+            "catatanHTML": "<em>Edisi 2024, cetak ulang</em>"
+        },
+        {
+            "gambar":"../assets/img/Pengantar Akuntansi EKMA411502.jpg",
+            "kode": "EKMA4115",
+            "judul": "Pengantar Akuntansi",
+            "kategori": "MK Wajib",
+            "edisi": "-",
+            "upbjj": "Jakarta",
+            "lokasiRak": "R1-A4",
+            "harga": 60000,
+            "qty": 7,
+            "safety": 15,
+            "catatanHTML": "<strong>Cover baru</strong>"
+        },
+        {
+            "gambar": "../assets/img/Biologi umum BIOL411002.jpg",
+            "kode": "BIOL4201",
+            "judul": "Biologi Umum (Praktikum)",
+            "kategori": "Praktikum",
+            "edisi": "-",
+            "upbjj": "Surabaya",
+            "lokasiRak": "R3-B2",
+            "harga": 80000,
+            "qty": 12,
+            "safety": 10,
+            "catatanHTML": "Butuh <u>pendingin</u> untuk kit basah"
+        },
+        {
+            "gambar": "../assets/img/Dasar-dasar sosiologi.jpeg",
+            "kode": "FISIP4001",
+            "judul": "Dasar-Dasar Sosiologi",
+            "kategori": "MK Pilihan",
+            "edisi": "-",
+            "upbjj": "Makassar",
+            "lokasiRak": "R2-C1",
+            "harga": 55000,
+            "qty": 2,
+            "safety": 8,
+            "catatanHTML": "Stok <i>menipis</i>, prioritaskan reorder"
+        },
+        {
+            "gambar": "../assets/img/pengantar_komunikasi.jpg",
+            "kode": "ASIP4301",
+            "judul": "Pengantar Ilmu Komunikasi",
+            "kategori": "BMP",
+            "edisi": "2",
+            "upbjj": "Jakarta",
+            "lokasiRak": "0TMP01",
+            "harga": 0,
+            "qty": 548,
+            "safety": 164,
+            "catatanHTML": "Stok tersedia"
+        },
+        {
+            "gambar": "../assets/img/manajemen_keuangan.jpg",
+            "kode": "EKMA4216",
+            "judul": "Manajemen Keuangan",
+            "kategori": "BMP",
+            "edisi": "3",
+            "upbjj": "Jakarta",
+            "lokasiRak": "0JKT01",
+            "harga": 0,
+            "qty": 392,
+            "safety": 117,
+            "catatanHTML": "Stok tersedia"
+        },
+        {
+            "gambar": "../assets/img/kepemimpinan.jpg",
+            "kode": "EKMA4310",
+            "judul": "Kepemimpinan",
+            "kategori": "BMP",
+            "edisi": "1",
+            "upbjj": "Surabaya",
+            "lokasiRak": "0SBY02",
+            "harga": 0,
+            "qty": 278,
+            "safety": 83,
+            "catatanHTML": "Stok tersedia"
+        },
+        {
+            "gambar": "../assets/img/mikrobiologi.jpg",
+            "kode": "BIOL4211",
+            "judul": "Mikrobiologi Dasar",
+            "kategori": "BMP",
+            "edisi": "2",
+            "upbjj": "Makassar",
+            "lokasiRak": "0MLG01",
+            "harga": 0,
+            "qty": 165,
+            "safety": 49,
+            "catatanHTML": "Stok tersedia"
+        },
+        {
+            "gambar": "../assets/img/paud_perkembangan.jpeg",
+            "kode": "PAUD4401",
+            "judul": "Perkembangan Anak Usia Dini",
+            "kategori": "BMP",
+            "edisi": "4",
+            "upbjj": "Padang",
+            "lokasiRak": "0UPBJJBDG",
+            "harga": 0,
+            "qty": 204,
+            "safety": 61,
+            "catatanHTML": "Stok tersedia"
+        },
+        {
+            "gambar": "../assets/img/MSIM4309.jpg",
+            "kode": "MSIM4309",
+            "judul": "Pemrograman Berbasis Web",
+            "kategori": "BMP",
+            "edisi": "3",
+            "upbjj": "Denpasar",
+            "lokasiRak": "bgr27",
+            "harga": 0,
+            "qty": 118,
+            "safety": 35,
+            "catatanHTML": "Stok tersedia"
+        }
+    ],
+    "tracking": [
+        {
+            "DO2025-0001": {
+                "nim": "123456789",
+                "nama": "Rina Wulandari",
+                "status": "Dalam Perjalanan",
+                "ekspedisi": "JNE",
+                "tanggalKirim": "2025-08-25",
+                "paket": "PAKET-UT-001",
+                "total": 120000,
+                "perjalanan": [
+                    {
+                        "waktu": "2025-08-25 10:12:20",
+                        "keterangan": "Penerimaan di Loket: TANGSEL"
+                    },
+                     {
+                        "waktu": "2025-08-25 14:07:56",
+                        "keterangan": "Tiba di Hub: JAKSEL"
+                    },
+                    {
+                        "waktu": "2025-08-26 08:44:01",
+                        "keterangan": "Diteruskan ke Kantor Tujuan"
+                    }
+                ]
+            }
+        },
+        {
+            "2023001234": {
+                "nomorDO": "2023001234",
+                "nim": "",
+                "nama": "Rina Wulandari",
+                "status": "Dalam Perjalanan",
+                "ekspedisi": "JNE",
+                "tanggalKirim": "2025-08-25",
+                "paket": "0JKT01",
+                "total": 180000,
+                "perjalanan": [
+                    {
+                    "waktu": "2025-08-25 10:12:20",
+                    "keterangan": "Penerimaan di Loket: TANGERANG SELATAN. Pengirim: Universitas Terbuka"
+                    },
+                    {
+                    "waktu": "2025-08-25 14:07:56",
+                    "keterangan": "Tiba di Hub: TANGERANG SELATAN"
+                    },
+                    {
+                    "waktu": "2025-08-25 10:12:20",
+                    "keterangan": "Diteruskan ke Kantor Jakarta Selatan"
+                    }
+                ]
+            }
+        },
+        {
+            "2023005678": {
+                "nomorDO": "2023005678",
+                "nim": "",
+                "nama": "Agus Pranoto",
+                "status": "Selesai",
+                "ekspedisi": "Pos Indonesia",
+                "tanggalKirim": "2025-08-25",
+                "paket": "0UPBJJBDG",
+                "total": 220000,
+                "perjalanan": [
+                    {
+                    "waktu": "2025-08-25 10:12:20",
+                    "keterangan": "Penerimaan di Loket: TANGERANG SELATAN. Pengirim: Universitas Terbuka"
+                    },
+                    {
+                    "waktu": "2025-08-25 14:07:56",
+                    "keterangan": "Tiba di Hub: TANGERANG SELATAN"
+                    },
+                    {
+                    "waktu": "2025-08-25 16:30:10",
+                    "keterangan": "Diteruskan ke Kantor Kota Bandung"
+                    },
+                    {
+                    "waktu": "2025-08-26 12:15:33",
+                    "keterangan": "Tiba di Hub: Kota BANDUNG"
+                    },
+                    {
+                    "waktu": "2025-08-26 15:06:12",
+                    "keterangan": "Proses antar ke Cimahi"
+                    },
+                    {
+                    "waktu": "2025-08-26 20:00:00",
+                    "keterangan": "Selesai Antar. Penerima: Agus Pranoto"
+                    }
+                ]
+            }
+        }
+    ]
+}

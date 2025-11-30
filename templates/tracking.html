@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Pengiriman - SIITA UT</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="halaman-tracking">
+
+    <header class="header">
+        <img src="../assets/logo UT.png" alt="Logo UT" class="logo-header">
+        <div class="judul-stock">
+            <h1>Tracking Pengiriman</h1>
+            <h4>Lacak status pengiriman bahan ajar Anda secara real-time. <br>Pastikan bahan ajar Anda sampai tujuan tepat waktu.</h4>
+            <p><br></p>
+        </div>
+        <a href="../dashboard.html" class="tombol-kembali"><i class="fas fa-home"></i> Kembali ke dashboard</a>
+    </header>
+    
+    <div id="tracking-app">
+        <main class="konten-tracking">
+            <section class="pencarian-tracking">
+                <h1><i class="fas fa-search"></i>Cari Status Pengiriman Anda</h1>
+                <form @submit.prevent="cariDO">
+                    <div class="kelompok-input">
+                        <label for="nomor-do">Masukan Nomor Delivery Order</label>
+                        <input type="text" id="nomor-do" v-model="nomorDO" placeholder="nomor DO">
+                    </div>
+                    <button type="submit" class="tombol-utama">Cek Pengiriman</button>
+                </form>
+                <button class="tombol-utama" @click="toggleFormDOBaru">
+                    <i class="fas fa-plus"></i> Buat DO Baru
+                </button>
+            </section>
+
+            <!-- FORM BUAT DO BARU -->
+            <section v-if="showFormDOBaru" class="pencarian-tracking">
+                <h2><i class="fas fa-file-alt"></i> Buat Delivery Order Baru</h2>
+                
+                <div class="info-pengiriman">
+                    <p><strong>Nomor DO Otomatis:</strong> <span style="color: #0056b3; font-weight: bold;">{{ nomorDOOtomatis }}</span></p>
+                </div>
+
+                <form @submit.prevent="buatDOBaru">
+                    <div class="kelompok-input">
+                        <label for="nim">NIM Mahasiswa</label>
+                        <input type="text" id="nim" v-model="doBaru.nim" placeholder="Masukkan NIM" required>
+                    </div>
+
+                    <div class="kelompok-input">
+                        <label for="nama">Nama Mahasiswa</label>
+                        <input type="text" id="nama" v-model="doBaru.nama" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="ekspedisi">Jenis Ekspedisi</label>
+                        <select id="ekspedisi" v-model="doBaru.ekspedisi" required>
+                            <option value="">Pilih Ekspedisi</option>
+                            <option v-for="exp in ekspedisiList" :value="exp.kode" :key="exp.Kode">
+                                {{ exp.nama }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="paket">Paket Bahan Ajar</label>
+                        <select id="paket" v-model="doBaru.paket" required>
+                            <option value="">Pilih Paket</option>
+                            <option v-for="paket in paketList" :value="paket.kode" :key="paket.kode">
+                                {{ paket.kode }} - {{ paket.nama }} (Rp {{ paket.harga.toLocaleString('id-ID') }})
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- DETAIL PAKET YANG DIPILIH -->
+                    <div v-if="detailPaket" class="info-pengiriman" style="margin-top: 15px;">
+                        <h4>Detail Paket:</h4>
+                        <p><strong>Nama Paket:</strong> {{ detailPaket.nama }}</p>
+                        <p><strong>Kode Paket:</strong> {{ detailPaket.kode }}</p>
+                        <p><strong>Isi Paket:</strong> {{ detailPaket.isi.join(', ') }}</p>
+                        <p><strong>Total Harga:</strong> <span style="color: #28a745; font-weight: bold;">{{ totalHargaFormatted }}</span></p>
+                    </div>
+
+                    <div class="kelompok-input">
+                        <label for="tanggal">Tanggal Kirim</label>
+                        <input type="date" id="tanggal" v-model="doBaru.tanggalKirim" required>
+                    </div>
+
+                    <div class="status-info" :class="statusClassDO">
+                        <i class="fas" 
+                        :class="statusClassDO === 'status-siap' ? 'fa-check-circle' : 'fa-clock'"></i>
+                        {{ statusFormDO }}
+                    </div>
+
+                    <div class="detail-actions">
+                        <button type="submit" class="tombol-utama">
+                            <i class="fas fa-save"></i> Simpan DO
+                        </button>
+                        <button type="button" class="tombol-keluar" @click="toggleFormDOBaru">
+                            <i class="fas fa-times"></i> Batal
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- hasil tracking -->
+            <section v-if="showHasilTracking && hasilTracking" class="hasil-tracking">
+                <h2><i class="fas fa-shipping-fast"></i>Detail Pengiriman</h2>
+                <div class="info-pengiriman">
+                    <p><strong>Nomor DO:</strong> <span>{{ hasilTracking.nomor || hasilTracking.nomorDO }}</span></p>
+                    <p><strong>NIM:</strong> <span>{{ hasilTracking.NIM || hasilTracking.nim }}</span></p>
+                    <p><strong>Nama Mahasiswa:</strong> <span>{{ hasilTracking.nama }}</span></p>
+                    <p><strong>Status:</strong> 
+                        <span :class="['status-badge', getTrackingBadgeClass(hasilTracking.status)]">
+                            <i :class="getTrackingIcon(hasilTracking.status)"></i>
+                            {{ hasilTracking.status }}
+                        </span>
+                    </p>
+                    <p><strong>Ekspedisi:</strong> <span>{{ getNamaEkspedisi(hasilTracking.ekspedisi) }}</span></p>
+                    <p><strong>Tanggal Kirim:</strong> <span>{{ formatTanggal(hasilTracking.tanggalKirim) }}</span></p>
+                    <p><strong>Paket:</strong> <span>{{ getNamaPaket(hasilTracking.paket) }}</span></p>
+                    <p><strong>Total Pembayaran:</strong> <span style="color: #28a745; font-weight: bold;">{{ hasilTracking.total }}</span></p>
+                </div>
+                
+                <!-- RIWAYAT PERJALANAN -->
+                <div v-if="hasilTracking.perjalanan && hasilTracking.perjalanan.length > 0" class="riwayat-perjalanan">
+                    <h3><i class="fas fa-route"></i> Riwayat Perjalanan</h3>
+                    <div class="timeline">
+                        <div v-for="(perjalanan, index) in hasilTracking.perjalanan" 
+                             :key="index" 
+                             class="timeline-item"
+                             :class="{'timeline-item-last': index === hasilTracking.perjalanan.length - 1}">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-waktu">{{ perjalanan.waktu }}</div>
+                                <div class="timeline-keterangan">{{ perjalanan.keterangan }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: TIDAK DITEMUKAN -->
+            <section v-if="showHasilTracking && !hasilTracking" class="hasil-tracking">
+                <div class="info-pengiriman">
+                    <h3 style="color: #dc3545; text-align: center;">
+                        <i class="fas fa-exclamation-triangle"></i> Data Tidak Ditemukan
+                    </h3>
+                    <p style="text-align: center;">Nomor DO <strong>{{ nomorDO }}</strong> tidak ditemukan dalam sistem.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+
+     <script src="../js/services/api.js"></script>
+    <script src="../js/components/tracking-app.js"></script>
+    
+    <script>
+        // Cek login
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (!loggedIn || loggedIn !== 'true') {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>

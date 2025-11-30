@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+     <div id="order-app">
+        <!-- Header -->
+        <header class="header">
+            <div class="judul-dashboard">
+                <h1>Form Pemesanan Bahan Ajar</h1>
+                <h4>Pesan bahan ajar dari rumah dengan mudah dengan aplikasi SITTA. <br>Pesan sekarang sebelum perkuliahan dimulai.</h4>
+                <br> <br>
+            </div>
+            <img src="../assets/logo UT.png" alt="Logo UT" class="logo-header">
+            <a href="../dashboard.html" class="tombol-kembali"><i class="fas fa-home"></i> Kembali ke dashboard</a>
+        </header>
+
+        <!-- Konten Utama -->
+        <main class="konten-dashboard">
+            <div class="konten-tracking">
+                <!-- Form Pemesanan -->
+                <div class="pencarian-tracking">
+                    <h2>Form Pemesanan Bahan Ajar</h2>
+                    
+                    <form @submit.prevent="submitPemesanan" id="form-pemesanan">
+                        <!-- Data Mahasiswa -->
+                        <div class="kelompok-input">
+                            <label for="nim">NIM</label>
+                            <input type="text" id="nim" v-model="formPemesanan.nim" placeholder="Masukkan NIM (8-12 digit)" :class="{ 'error': errors.nim }">
+                        </div>
+
+                        <div class="kelompok-input">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" v-model="formPemesanan.nama" placeholder="Masukkan nama lengkap" :class="{ 'error': errors.nama }">
+                        </div>
+
+                        <div class="kelompok-input">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" v-model="formPemesanan.email" placeholder="Masukkan email aktif" :class="{ 'error': errors.email }">
+                        </div>
+
+                        <div class="kelompok-input">
+                            <label for="telepon">Nomor Telepon</label>
+                            <input type="text" id="telepon" v-model="formPemesanan.telepon" placeholder="Masukkan nomor telepon (10-13 digit)" :class="{ 'error': errors.telepon }">
+                        </div>
+
+                        <div class="kelompok-input">
+                            <label for="alamat">Alamat Pengiriman</label>
+                            <textarea id="alamat" v-model="formPemesanan.alamat" placeholder="Masukkan alamat lengkap untuk pengiriman"rows="3" :class="{ 'error': errors.alamat }"></textarea>
+                        </div>
+
+                        <!-- Pilihan Paket -->
+                        <div class="filter-group">
+                            <label for="paket">Pilih Paket</label>
+                            <select id="paket" v-model="formPemesanan.paket" :class="{ 'error': errors.paket }">
+                                <option value="">-- Pilih Paket --</option>
+                                <option v-for="paket in daftarPaket" :key="paket.kode" :value="paket.kode">
+                                    {{ paket.nama }} - {{ formatRupiah(paket.harga) }}
+                                </option>
+                            </select>
+                            
+                            <!-- Detail Paket Terpilih -->
+                            <div v-if="detailPaketTerpilih" class="detail-paket">
+                                <h4>Detail Paket :</h4>
+                                <p><strong>Nama:</strong> {{ detailPaketTerpilih.nama }}</p>
+                                <p><strong>Harga:</strong> {{ formatRupiah(detailPaketTerpilih.harga) }}</p>
+                                <p><strong>Deskripsi:</strong> {{ detailPaketTerpilih.deskripsi }}</p>
+                                <p><strong>Isi Paket:</strong> {{ detailPaketTerpilih.isi ? detailPaketTerpilih.isi.join(', ') : 'Tidak tersedia' }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Pilihan Ekspedisi -->
+                        <div class="filter-group">
+                            <label for="ekspedisi">Pilih Ekspedisi</label>
+                            <select id="ekspedisi" v-model="formPemesanan.ekspedisi" :class="{ 'error': errors.ekspedisi }">
+                                <option value="">-- Pilih Ekspedisi --</option>
+                                <option v-for="ekspedisi in daftarEkspedisi" :key="ekspedisi.kode" :value="ekspedisi.kode">
+                                    {{ ekspedisi.nama }} - {{ formatRupiah(ekspedisi.biaya) }} ({{ ekspedisi.estimasi }})
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Metode Pembayaran -->
+                        <div class="filter-group">
+                            <label for="metodePembayaran">Metode Pembayaran</label>
+                            <select id="metodePembayaran" v-model="formPemesanan.metodePembayaran">
+                                <option v-for="metode in daftarMetodePembayaran" :key="metode.kode" :value="metode.kode">
+                                    {{ metode.nama }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Catatan Tambahan -->
+                        <div class="kelompok-input">
+                            <label for="catatan">Catatan Tambahan (Opsional)</label>
+                            <textarea id="catatan" v-model="formPemesanan.catatan" placeholder="Masukkan catatan tambahan untuk pesanan" rows="2"></textarea>
+                        </div>
+
+                        <!-- Ringkasan Biaya -->
+                        <div class="ringkasan-biaya">
+                            <h3>Ringkasan Biaya</h3>
+                            <div class="info-group">
+                                <span>Subtotal (Paket):</span>
+                                <span>{{ formatRupiah(subtotal) }}</span>
+                            </div>
+                            <div class="info-group">
+                                <span>Biaya Pengiriman:</span>
+                                <span>{{ formatRupiah(biayaPengiriman) }}</span>
+                            </div>
+                            <div class="info-group total">
+                                <strong>Total Biaya:</strong>
+                                <strong>{{ formatRupiah(totalBiaya) }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="status-info" :class="statusClass">
+                            <i class="fas" 
+                            :class="statusClass === 'status-siap' ? 'fa-check-circle' : 'fa-clock'"></i>
+                            {{ statusForm }}
+                        </div>
+
+                        <!-- Tombol Aksi -->
+                        <div class="detail-actions">
+                            <button type="submit" class="tombol-utama" :disabled="!canSubmit || isLoading">{{ isLoading ? 'Memproses...' : 'Buat Pesanan' }}</button>
+                            <button type="button" class="tombol-keluar" @click="resetForm">Batalkan Pesanan</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Ringkasan Pesanan -->
+                <div v-if="showSummary" class="hasil-tracking">
+                    <h2>Pesanan Berhasil Dibuat!</h2>
+                    
+                    <div class="info-pengiriman">
+                        <h3>Detail Pesanan</h3>
+                        <p>
+                            <strong>Nomor DO:</strong>
+                            <span class="status-pengiriman">{{ nomorDO }}</span>
+                        </p>
+                        <p>
+                            <strong>Nama:</strong>
+                            <span>{{ formPemesanan.nama }}</span>
+                        </p>
+                        <p>
+                            <strong>Paket:</strong>
+                            <span>{{ detailPaketTerpilih.nama }}</span>
+                        </p>
+                        <p>
+                            <strong>Ekspedisi:</strong>
+                            <span>{{ detailEkspedisiTerpilih.nama }}</span>
+                        </p>
+                        <p>
+                            <strong>Total Biaya:</strong>
+                            <span>{{ formatRupiah(totalBiaya) }}</span>
+                        </p>
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="status-badge badge-info"><i class="fas -faspinner"></i> Diproses</span>
+                        </p>
+                    </div>
+
+                    <div class="riwayat-perjalanan">
+                        <h3>Status Pesanan</h3>
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-waktu">{{ new Date().toLocaleString('id-ID') }}</div>
+                                    <div class="timeline-keterangan">Pesanan diterima dan sedang diproses</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button class="tombol-utama" @click="cetakPesanan">Cetak Pesanan</button>
+                        <button class="tombol-keluar" @click="resetForm">Pesan Lagi</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/services/api.js"></script>
+    <script src="../js/components/order-form-app.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (!loggedIn || loggedIn !== 'true') {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>

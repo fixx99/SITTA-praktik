@@ -1,0 +1,1485 @@
+body{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, helvetica, serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+/*halaman login*/
+.halaman-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo-login{
+    width: 30%;
+    max-width: 80%;
+    height: 30%;
+    max-height: 80%;
+    margin-top: 1rem;
+}
+
+.container-login{
+    background-color: #ffffff(255, 255, 255);
+    width: 300px;
+    padding: 25px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgb(175, 166, 36);
+    text-align: center;
+}
+
+input{
+    width:250px;
+    padding: 10px;
+    box-sizing:border-box;
+    border-radius: 10px;
+    background-color: rgb(243, 242, 242);
+    border: none;
+    margin-bottom: 8px;
+}
+
+input:hover{ background-color: rgb(220, 219, 219);}
+.tombol-utama{
+    color: #ffffff;
+    width: 250px;
+    padding: 8px;
+    background-color: rgb(22, 11, 180);
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.tombol-utama:hover{background-color: rgb(18, 9, 139)}
+
+/* Container utama modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); 
+    padding-top: 60px;
+}
+
+.konten-modal {
+    background-color: #fefefe;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 25px;
+    width: 250%;
+    max-width: 460px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center; 
+}
+
+.tutup-modal {
+    margin: 0;
+    color: black;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.konten-modal input[type="text"],
+.konten-modal input[type="email"],
+.konten-modal input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: white; 
+}
+
+.konten-modal label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.konten-modal button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.konten-modal button:hover {
+    background-color: #0056b3;
+}
+
+/* Link Footer login */
+.footer-login {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+    margin-top: 5px;
+}
+
+.footer-login .link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+.footer-login .link:hover {
+    color: #0056b3;
+}
+
+.footer-login .left {
+    text-align: left;
+}
+
+.footer-login .right {
+    text-align: right;
+}
+
+/* Halaman Dashboard */
+.halaman-dahboard{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 100vh;
+}
+
+.logo-header{
+    width: 130px;
+    max-width: 130px;
+    height: auto;
+    position: absolute;
+    top: 18%;
+    right: 50px;
+    transform: translateY(-50%);
+    margin-left: auto;
+}
+
+.header{
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+}
+
+.judul-stok, .judul-dashboard h1{margin-bottom: 5px;}
+
+.tombol-keluar{
+    background-color: #ea1f08;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 30px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.tombol-keluar:hover{background-color: #d11c08;}
+
+/*navigasi*/
+.navigasi-dashboard {
+    background-color: #054f9f;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.menu-dashboard {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-dashboard li {
+    position: relative;
+}
+
+.menu-dashboard a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s;
+}
+
+.menu-dashboard a:hover {
+    background-color: #003377;
+}
+
+.menu-dropdown:hover .submenu-dropdown {
+    display: block;
+}
+
+.submenu-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.submenu-dropdown a {
+    color: #333;
+    padding: 10px 15px;
+}
+
+.submenu-dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+.panah-dropdown {
+    font-size: 12px;
+}
+
+/* ===== STATISTIK ===== */
+.ikon-statistik {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0056b3;
+    font-size: 18px;
+}
+
+.angka-statistik {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+}
+
+/* ===== STATISTIK STOK ===== */
+.stat-item {
+    flex: 1;
+    min-width: 120px;
+    background: rgb(255, 255, 255);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-angka {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.stat-persen {
+    font-size: 14px;
+}
+
+/*==loading==*/
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray-dark);
+}
+
+.loading-state i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+/*isi dashboard*/
+.konten-dashboard{padding: 30px 0;}
+
+.konten-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.kartu-menu {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow o.3s ease;
+}
+
+.kartu-menu:hover{
+    transform: translateY(-5px);
+}
+
+.gambar-buku {
+    height: 200px;
+    overflow:hidden;
+}
+
+.gambar-buku img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.kartu-menu:hover .gambar-buku img {
+    transform: scale(1.1);
+}
+
+.kartu-menu h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #0056b3;
+}
+
+.keterangan-produk {
+    margin-bottom: 15px;
+    color: #111111;
+    font-size: 14px;
+}
+
+.tombol-primer{
+    text-decoration: none;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex;
+    color: #0056b3;
+}
+.tombol-primer:hover{
+    color: #05da61;
+    transition: transform 0.3s ease;
+}
+
+.tombol-primer i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.tombol-primer:hover i {
+    transform: translateX(3px);
+}
+
+/*stock bahan ajar*/
+.tombol-kembali,.tombol-tambah-buku{
+    text-decoration: none;
+    background-color: rgb(255, 213, 0);
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 30px;
+    cursor: pointer;
+}
+
+.tombol-kembali,.tombol-tambah-buku:hover{
+    background-color: #e0a800;
+    color: #ffffff;
+}
+
+/* Halaman Stok */
+.kontrol-stok {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding: 8px 30px;
+}
+
+.kontrol-kiri h2 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+}
+
+.subjudul-stok {
+    color: black;
+    margin-bottom: 0;
+}
+
+.kontrol-kanan {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pencarian-stok {
+    position: relative;
+    min-width: 250px;
+}
+
+.pencarian-stok input {
+    width: 100%;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+#isi-detail-produk {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+#cover-detail {
+    width: 125px;
+    flex-shrink: 0;
+}
+
+#cover-detail img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#info-detail {
+    flex-grow: 1;
+    line-height: 1.7rem;
+    font-size: 16px;
+    text-align: left;
+}
+
+#info-detail p {
+    margin: 0;
+    color: #000000;
+    white-space: nowrap;
+}
+
+#info-detail strong {
+    display: inline-block;
+    width: 100px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.form-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-kolom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#modal-tambah-buku input:not([type="submit"]),
+#modal-tambah-buku select {
+    width: 100%; 
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+#modal-tambah-buku label {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.tombol-simpan {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tombol-simpan:hover {
+    background-color: #1e7e34;
+}
+
+#modal-tambah-buku .konten-modal {
+    max-width: 600px;
+}
+
+/* Style untuk input file */
+.kelompok-input input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.kelompok-input input[type="text"]:hover {
+    background-color: #f0f0f0;
+}
+
+.kelompok-input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.kelompok-input label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.kelompok-input textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.kelompok-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box; /* Penting untuk width 100% */
+}
+
+/* Style untuk preview gambar */
+#preview-gambar {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #ddd;
+}
+
+#preview-img {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Filter Section */
+.filter-section {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+}
+
+.detail-content {
+    margin-top: 20px;
+}
+
+.detail-info-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-actions{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.detail-actions .tombol-utama, 
+.detail-actions .tombol-keluar {
+    flex: 1;
+    width: auto;
+    margin-bottom: 0;
+}
+
+.info-group {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.info-group strong {
+    color: #333;
+    min-width: 120px;
+}
+
+/* Status Stok */
+.status-aman {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-menipis {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-kosong {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.tombol-tutup:hover {
+    background: #5a6268;
+}
+
+/* Status Form Styles */
+.status-info {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-siap {
+    color: #155724;
+}
+
+.status-tunggu {
+    color: #856404;
+}
+
+.status-error {
+    color: #721c24;
+}
+
+/* Halaman Tracking */
+.konten-tracking{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    min-height: 20%;
+    padding: 20px;
+    gap: 30px;
+}
+
+.pencarian-tracking,.hasil-tracking{
+    background-color: #ffffff(255, 255, 255);
+    width: 600px;
+    max-width: 700px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(175, 166, 36);
+    text-align: center;
+    font-size: 16px; 
+    margin: auto;
+}
+
+/* hasil tracking*/
+.hasil-tracking{text-align: justify;}
+
+.hasil-tracking h2 {
+    color: #0056b3;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Info Detail Pengiriman */
+.info-pengiriman {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-pengiriman p {
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-pengiriman p:last-child{border-bottom: none;}
+
+.info-pengiriman strong {
+    color: #000000;
+    font-weight: 600;
+    min-width: 150px;
+}
+
+.info-pengiriman span {
+    color: #333;
+    font-weight: 500;
+    text-align: right;
+}
+
+.status-pengiriman {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+/* Riwayat Perjalanan */
+.riwayat-perjalanan {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.riwayat-perjalanan h3 {
+    color: #0056b3;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 10px;
+}
+
+.timeline {
+    position: relative;
+    list-style: none;
+    padding-left: 4px;
+}
+
+/* Garis Vertikal Timeline */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    width: 2px;
+    background-color: #ccc;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-left: 2px solid transparent;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background: #0056b3;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #0056b3;
+}
+
+.timeline-content {
+    margin-left: 20px;
+}
+
+/* Titik Bulat pada Timeline */
+.timeline-waktu {
+    font-weight: 600;
+    color: #0056b3;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.timeline-keterangan {
+    color: #495057;
+    line-height: 1.5;
+    background: #f1f1f1;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 3px solid #0056b3;
+}
+
+/* Tambahan style untuk form pemesanan */
+.detail-paket {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border-left: 4px solid #0056b3;
+}
+        
+.detail-paket h4 {
+    margin-top: 0;
+    color: #0056b3;
+}
+        
+.detail-paket p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+        
+.ringkasan-biaya {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+        
+.ringkasan-biaya h3 {
+    margin-top: 0;
+    color: #0056b3;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+        
+.ringkasan-biaya .total {
+    border-top: 2px solid #dee2e6;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+        
+.error-message {
+    color: #dc3545;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block;
+}
+        
+.input.error, select.error, textarea.error {
+    border-color: #dc3545 !important;
+}
+        
+/* Style untuk form di halaman order */
+#form-pemesanan {
+    max-width: 100%;
+}
+        
+@media print {
+    .navigasi-dashboard, .detail-actions {
+        display: none !important;
+    }
+            
+    .hasil-tracking {
+        box-shadow: none !important;
+    }
+}
+
+/* Style khusus untuk Status Badge */
+.status-badge-container {
+    text-align: center;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.badge-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.badge-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 2px solid #ffeaa7;
+}
+
+.badge-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+.badge-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 2px solid #bee5eb;
+}
+
+.badge-default {
+    background-color: #e2e3e5;
+    color: #383d41;
+    border: 2px solid #d6d8db;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid;
+    transition: transform 0.2s ease;
+    background: white;
+}
+
+.status-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.status-item.badge-success {
+    border-left-color: #28a745;
+}
+
+.status-item.badge-warning {
+    border-left-color: #ffc107;
+}
+
+.status-item.badge-error {
+    border-left-color: #dc3545;
+}
+
+.status-item.badge-info {
+    border-left-color: #17a2b8;
+}
+
+.status-item.badge-default {
+    border-left-color: #6c757d;
+}
+
+.status-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    width: 40px;
+    text-align: center;
+}
+
+.status-info {
+    flex: 1;
+}
+
+.status-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.status-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+}
+
+.preview-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.code-example pre {
+    background: #2d2d2d;
+    color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.notification-badge {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    /* Desktop kecil / Tablet landscape */
+    .konten-modal {
+        max-width: 80%;
+        margin: 80px auto;
+        padding: 25px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Tablet */
+    .header{
+        padding: 25px;
+        gap: 15px;
+        font-size: 14px;
+    }
+    
+    .konten-modal {
+        max-width: 85%;
+        margin: 60px auto;
+        padding: 20px;
+    }
+    
+    .form-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+    }
+    
+    .kartu-menu {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Tablet kecil / HP landscape */
+    .header {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 15px;
+        text-align: left;
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .logo-header{
+        width: 100px; 
+        order: 1;
+    }
+
+    .modal {
+        padding-top: 30px;
+    }
+    
+    .konten-modal {
+        max-width: 90%;
+        margin: 40px auto;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .tutup-modal {
+        font-size: 20px;
+        top: 10px;
+        right: 15px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .gambar-buku {
+        height: 150px;
+    }
+    
+    .kartu-menu h2 {
+        font-size: 16px;
+    }
+    
+    .keterangan-produk {
+        font-size: 12px;
+    }
+    
+    .pencarian-tracking, .hasil-tracking {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .info-pengiriman p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-pengiriman strong {
+        min-width: auto;
+    }
+    
+    /* Modal tambah buku responsive */
+    #modal-tambah-buku .konten-modal {
+        max-width: 95%;
+        margin: 20px auto;
+    }
+    
+    #isi-detail-produk {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #cover-detail {
+        width: 100%;
+        text-align: center;
+    }
+    
+    #cover-detail img {
+        max-width: 150px;
+    }
+    /*status badge*/
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+            
+    .filter-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+            
+    .detail-actions {
+        flex-direction: column;
+    }
+            
+    .detail-actions button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* HP */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+        gap: 10px;
+    }
+
+    .logo-header{
+        width: 80px; 
+        order: 1;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .modal {
+        padding-top: 20px;
+    }
+    
+    .konten-modal {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .konten-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .kartu-menu {
+        padding: 12px;
+    }
+    
+    .gambar-buku {
+        height: 120px;
+    }
+    
+    .tombol-utama, .tombol-primer {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .detail-actions{flex-direction: column;}
+    
+    .kontrol-stok {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .tombol-tambah-buku, .tombol-kembali {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    /* Form dalam modal */
+    .konten-modal input[type="text"],
+    .konten-modal input[type="email"],
+    .konten-modal input[type="password"],
+    .konten-modal select {
+        padding: 12px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Footer login responsive */
+    .footer-login {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .footer-login .left,
+    .footer-login .right {
+        text-align: center;
+    }
+    
+    /* Navigasi dashboard responsive */
+    .navigasi-dashboard {
+        flex-direction: column;
+    }
+    
+    .menu-dashboard {
+        flex-direction: column;
+    }
+    
+    .menu-dashboard a {
+        padding: 12px 15px;
+        text-align: center;
+    }
+    
+    .submenu-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+    
+    .konten-tracking{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 50%;
+        min-height: 20%;
+        padding: 20px;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 375px) {
+    /* HP kecil */
+    .header{
+        padding: 10px 8px;
+    }
+
+    .logo-header{
+        width: 70px; 
+        order: 1;
+    }
+
+    .tombol-keluar, .tombol-kembali{
+        display: flex;
+        padding: 8px 10px;
+    }
+
+    .judul-stok h1 h4, .judul-dashboard h1 h4 {
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .konten-modal {
+        max-width: 98%;
+        margin: 10px auto;
+        padding: 12px;
+    }
+    
+    .container-login {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    input {
+        width: 100%;
+    }
+    
+    .konten-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo-header {
+        width: 20%;
+        top: 15%;
+        right: 20px;
+    }
+
+    .konten-tracking{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 50%;
+        min-height: 20%;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .status-badge {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+            
+    .filter-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes modalopen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Pastikan modal bisa di-scroll di HP */
+@media (max-height: 600px) {
+    .modal {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .konten-modal {
+        margin: 10px auto;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+}
+
+/* Perbaikan untuk timeline di HP */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 8px;
+    }
+    
+    .timeline-item {
+        padding-left: 25px;
+    }
+    
+    .timeline-marker {
+        left: -8px;
+        width: 16px;
+        height: 16px;
+    }
+    
+    .timeline-content {
+        margin-left: 15px;
+    }
+    
+    .timeline-waktu {
+        font-size: 16px;
+    }
+}

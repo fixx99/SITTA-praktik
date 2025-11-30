@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Bahan Ajar UT</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="halaman-login">
+    <div class="container-login">
+        <div class="header-login">
+            <img src="assets/logo UT.png" alt="Logo Universitas Terbuka" class="logo-login">
+            <h1 style="color:  rgb(22, 11, 180); margin: 5px;">SITTA</h1>            
+            <h2 style="font-size: 26px; margin: 0px;">Selamat Datang</h2>
+            <p style="font-size: 18px; margin: 8px;">Silahkan masuk</p>
+        </div>
+        
+        <form id="form-login" class="form-login">
+            <input type="email" id="email" placeholder="masukan email" required>
+            <input type="password" id="password" placeholder="masukan password" required>
+            <button type="button" onclick="masuk()" class="tombol-utama">masuk</button>
+        </form>
+        
+        <div class="footer-login">
+            <a href="#" class="link left" onclick="bukamodal('modal-lupa-password')">Lupa password?</a>
+            <a href="#" class="link right" onclick="bukamodal('modal-daftar-akun')">Belum punya akun?</a>
+        </div>
+    </div>
+
+    <!-- Modal Lupa Password -->
+    <div id="modal-lupa-password" class="modal">
+        <div class="konten-modal">
+            <span class="tutup-modal" onclick="tutupmodal('modal-lupa-password')">&times;</span>
+            <h2><i class="fas fa-key"></i> Lupa Password</h2>
+            <p>Masukkan email Anda untuk mereset password</p>
+            <div class="kelompok-input">
+                <input type="email" id="email-reset" placeholder="email@ut.ac.id">
+            </div>
+            <button class="tombol-utama" onclick="resetpassword()">
+                <i class="fas fa-paper-plane"></i> Kirim Link Reset
+            </button>
+        </div>
+    </div>
+    
+    <!-- Modal daftar akun -->
+    <div id="modal-daftar-akun" class="modal">
+        <div class="konten-modal modal-lebar">
+            <span class="tutup-modal" onclick="tutupmodal('modal-daftar-akun')">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Daftar Akun Baru</h2>
+            <form id="form-daftar-akun">
+                <div class="kelompok-input">
+                    <label for="nama-lengkap"><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="nama-lengkap" placeholder="Nama lengkap Anda" required>
+                </div>
+                
+                <div class="kelompok-input">
+                    <label for="email-daftar"><i class="fas fa-envelope"></i> Email UT</label>
+                    <input type="email" id="email-daftar" placeholder="emailut@ut.ac.id" required>
+                </div>
+                
+                <div class="kelompok-input">
+                    <label for="password-daftar"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password-daftar" placeholder="Buat password yang kuat" required>
+                </div>
+                
+                <button type="button" class="tombol-utama" onclick="daftarakun()">
+                    <i class="fas fa-user-plus"></i> Daftar Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="js/services/api.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Cek jika user sudah login, redirect ke dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (loggedIn === 'true') {
+                window.location.href = "dashboard.html";
+            }
+        });
+    </script>
+</body>
+</html>

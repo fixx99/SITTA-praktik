@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Bahan Ajar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="halaman-dashboard">
+    <header class="header">
+        <img src="assets/logo UT.png" alt="Logo UT" class="logo-header">
+        <div class="judul-dashboard">
+            <h1>Dashboard Aplikasi SITTA</h1>
+            <h3 id="salam-waktu"></h3>
+            <p>Kelola distribusi bahan ajar dengan mudah, cepat, dan terintegrasi.</p>
+        </div>
+        <button type="button" onclick="logout()" class="tombol-keluar"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+    </header>
+
+    <nav class="navigasi-dashboard">
+        <ul class="menu-dashboard">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="templates/stock.html"><i class="fas fa-book"></i> Informasi Bahan Ajar</a></li>
+            <li><a href="templates/tracking.html"><i class="fas fa-truck"></i> Tracking Pengiriman</a></li>
+            <li><a href="templates/order.html"><i class="fas fa-shopping-cart"></i> Pemesanan Bahan Ajar</a></li>
+            <li><a href="templates/status-badge.html"><i class="fas fa-tags"></i> Status badge</a></li>
+        </ul>
+    </nav>
+
+    <main class="konten-dashboard">
+        <!-- Statistik Dashboard -->
+        <div class="konten-grid" id="dashboard-stats">
+            <div class="kartu-menu">
+                <div class="ikon-statistik">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="info-statistik">
+                    <h3>Total Bahan Ajar</h3>
+                    <span class="angka-statistik">{{ statistikStok.total }}</span>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class="ikon-statistik">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <div class="info-statistik">
+                    <h3>Stok Menipis</h3>
+                    <span class="angka-statistik">{{ statistikStok.menipis }}</span>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class="ikon-statistik">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="info-statistik">
+                    <h3>Pengiriman Aktif</h3>
+                    <span class="angka-statistik">{{ statistikPengiriman.aktif }}</span>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class="ikon-statistik">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="info-statistik">
+                    <h3>Transaksi Selesai</h3>
+                    <span class="angka-statistik">{{ statistikPengiriman.selesai }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="konten-grid">
+            <div class="kartu-menu">
+                <div class= "gambar-buku">
+                    <img src="assets/img/kepemimpinan.jpg" alt="gambar bahan ajar">
+                </div>
+                        
+                <div class="info-buku">
+                    <h2>Kepemimpinan</h2>
+                    <p class="keterangan-produk"> BMP Kepemimpinan EKMA4310</p>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class= "gambar-buku">
+                    <img src="assets/img/manajemen_keuangan.jpg" alt="gambar bahan ajar">
+                </div>
+                        
+                <div class="info-buku">
+                    <h2>Manajemen Keuangan</h2>
+                    <p class="keterangan-produk"> BMP Manajemen Keuangan EKMA4216</p>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class= "gambar-buku">
+                    <img src="assets/img/pengantar_komunikasi.jpg" alt="gambar bahan ajar">
+                </div>
+                        
+                <div class="info-buku">
+                    <h2>Pengantar Ilmu Komunikasi</h2>
+                    <p class="keterangan-produk"> BMP Pengantar Ilmu Komunikasi ASIP4301</p>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class= "gambar-buku">
+                    <img src="assets/img/mikrobiologi.jpg" alt="gambar bahan ajar">
+                </div>
+                        
+                <div class="info-buku">
+                    <h2>Mikrobiologi Dasar</h2>
+                    <p class="keterangan-produk"> BMP mikrobiologi BIOL4211</p>
+                </div>
+            </div>
+            <div class="kartu-menu">
+                <div class= "gambar-buku">
+                    <img src="assets/img/paud_perkembangan.jpeg" alt="gambar bahan ajar">
+                </div>
+                        
+                <div class="info-buku">
+                    <h2>Perkembangan Anak Usia Dini</h2>
+                    <p class="keterangan-produk"> BMP Perkembangan dan Pengembangan Anak usia Dini PAUD4401</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="js/services/api.js"></script>
+    <script src="js//components/dashboard-app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

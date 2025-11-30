@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Bahan Ajar</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="halaman-stock">
+    <div id="stok-app">
+        <header class="header">
+            <img src="../assets/logo UT.png" alt="Logo UT" class="logo-header">
+            <div class="judul-stock">
+                <h1>Informasi Bahan Ajar</h1>
+                <h4 class="kontrol-kiri">
+                    Temukan informasi bahan ajar di sini. <br>
+                    Kelola data bahan ajar dengan mudah tanpa ribet.
+                </h4>
+                <p><br></p>
+            </div>
+            <a href="../dashboard.html" class="tombol-kembali"><i class="fas fa-home"></i> Kembali ke dashboard</a>
+        </header>
+    
+        <main class="konten-stok">
+            <!--control stok-->
+            <section class="kontrol-stok">
+                <div class="kontrol-kiri">
+                    <h2><i class="fas fa-books"></i> Daftar Bahan Ajar</h2>
+                    <p class="subjudul-stok">Kelola stok bahan ajar Universitas Terbuka</p>
+                </div>
+                <div class="kontrol-kanan">
+                    <div class="pencarian-stok">
+                        <input type="text" v-model="pencarianKeyword" placeholder="Cari judul, kode, atau lokasi...">
+                    </div>
+                    <button class="tombol-tambah-buku" @click="tampilkanModalTambah = true">
+                        <i class="fas fa-plus"></i> Tambah Buku
+                    </button>
+                </div>
+            </section>
+
+            <!-- Statistik Stok -->
+            <div class="filter-section" v-if="statistikStok.total > 0">
+                <div class="stat-item" :class="{'status-aman': statistikStok.aman > 0}">
+                    <span class="stat-angka">{{ statistikStok.aman }}</span>
+                    <span class="stat-label">Aman </span>
+                    <span class="stat-persen">({{ statistikStok.persenAman }}%)</span>
+                </div>
+                <div class="stat-item" :class="{'status-menipis': statistikStok.menipis > 0}">
+                    <span class="stat-angka">{{ statistikStok.menipis }}</span>
+                    <span class="stat-label">Menipis </span>
+                    <span class="stat-persen">({{ statistikStok.persenMenipis }}%)</span>
+                </div>
+                <div class="stat-item" :class="{'status-kosong': statistikStok.kosong > 0}">
+                    <span class="stat-angka">{{ statistikStok.kosong }}</span>
+                    <span class="stat-label">Kosong </span>
+                    <span class="stat-persen">({{ statistikStok.persenKosong }}%)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-angka">{{ statistikStok.total }}</span>
+                    <span class="stat-label">Total </span>
+                </div>
+            </div>
+
+            <!-- Filter dan sort section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label><i class="fas fa-map-marker-alt"></i> UT-Daerah : </label>
+                    <select v-model="filterUpbjj" @change="resetkategoriFilter">
+                        <option value="">Semua Daerah</option>
+                        <option v-for="daerah in upbjjList" :value="daerah">{{ daerah }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-group" v-if="filterUpbjj">
+                    <label><i class="fas fa-tags"></i> Kategori Mata Kuliah : </label>
+                    <select v-model="filterKategori">
+                        <option value="">Semua Kategori</option>
+                        <option v-for="kategori in kategoriList" :value="kategori">{{ kategori }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-chart-bar"></i> Status Stok : </label>
+                    <select v-model="filterStatus">
+                        <option value="">Semua Status</option>
+                        <option value="kosong">Kosong</option>
+                        <option value="menipis">Menipis</option>
+                        <option value="aman">Aman</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label><i class="fas fa-sort"></i> Urutkan Berdasarkan:</label>
+                    <select v-model="sortBy">
+                        <option value="judul">Judul</option>
+                        <option value="stok">Stok</option>
+                        <option value="harga">Harga</option>
+                    </select>
+                </div>
+
+                <button class="tombol-keluar" @click="resetFilter"><i class="fas fa-redo"></i> Reset Filter</button>
+            </div>
+
+            <!-- Loading State -->
+            <div v-if="isLoading" class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Memuat data stok...</p>
+            </div>
+
+            <!-- Modal Tambah Stok -->
+            <div v-if="tampilkanModalTambah" class="modal" style="display: block;">
+                <div class="konten-modal">
+                    <span class="tutup-modal" @click="tampilkanModalTambah = false">&times;</span>
+                    <h2>Tambah Buku Baru</h2>
+                    <form @submit.prevent="tambahBukuBaru">
+                        <div class="form-grid">
+                            <div class="form-kolom">
+                                <div class="kelompok-input">
+                                    <label>Kode Barang:</label>
+                                    <input type="text" v-model="bukuBaru.kodeBarang" required>
+                                </div>
+                                
+                                <div class="kelompok-input">
+                                    <label>Nama Buku:</label>
+                                    <input type="text" v-model="bukuBaru.namaBarang" required>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label>Jenis:</label>
+                                    <select v-model="bukuBaru.jenisBarang" required>
+                                        <option value="BMP">BMP</option>
+                                        <option value="Modul">Modul</option>
+                                        <option value="Buku Tambahan">Buku Tambahan</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="kelompok-input">
+                                    <label>Kode Lokasi:</label>
+                                    <input type="text" v-model="bukuBaru.kodeLokasi" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-kolom">
+                                <div class="kelompok-input">
+                                    <label>Edisi:</label>
+                                    <input type="text" v-model="bukuBaru.edisi" required>
+                                </div>
+                                
+                                <div class="kelompok-input">
+                                    <label>Stok:</label>
+                                    <input type="number" v-model="bukuBaru.stok" required>
+                                </div>
+                                
+                                <div class="kelompok-input">
+                                    <label>Safety Stock:</label>
+                                    <input type="number" v-model="bukuBaru.safetyStock" required>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label>UT-Daerah:</label>
+                                    <select v-model="bukuBaru.upbjj" required>
+                                        <option value="">Pilih Daerah</option>
+                                        <option v-for="daerah in upbjjList" :value="daerah">{{ daerah }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="kelompok-input">
+                            <label>Cover URL:</label>
+                            <input type="text" v-model="bukuBaru.cover" placeholder="https://example.com/cover.jpg">
+                        </div>
+                        
+                        <div class="kelompok-input">
+                            <label>Catatan:</label>
+                            <textarea v-model="bukuBaru.catatan"></textarea>
+                        </div>
+                        
+                        <div class="status-info" :class="statusClass">
+                            <i class="fas" 
+                            :class="statusClass === 'status-siap' ? 'fa-check-circle' : 'fa-clock'"></i>
+                            {{ statusForm }}
+                        </div>
+                        <button type="submit" class="tombol-utama">Simpan Buku</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    
+        
+        <!-- kartu buku -->
+        <div class="konten-grid">
+            <div class="kartu-menu" v-for="buku in bukuTerfilter" :key="buku.kode">
+                <div class="gambar-buku">
+                    <img :src="buku.gambar" :alt="buku.judul" @error="gambarError">
+                </div>
+                <div class="info-detail">
+                    <h2>{{ buku.judul }}</h2>
+                    <p class="keterangan-produk">{{ buku.kategori }} {{ buku.kode }}</p>
+                    <a href="#" class="tombol-primer" @click.prevent="bukaDetail(buku)">
+                        Detail Buku <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- detail buku -->
+        <div class="modal" v-if="modalDetailAktif" style="display: block;">
+            <div class="konten-modal">
+                <span class="tutup-modal" @click="tutupDetail">&times;</span>
+                
+                <h1>Detail Buku</h1>
+                
+                <div class="detail-content">
+                    <div class="detail-info-section">
+                        <div class="info-group">
+                            <strong>Nama Buku:</strong> {{ bukuDetail.judul }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Kode Barang:</strong> {{ bukuDetail.kode }}
+                        </div>
+                        <div class="info-group">
+                            <strong>UPBJJ:</strong> {{ bukuDetail.upbjj }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Lokasi Rak:</strong> {{ bukuDetail.lokasiRak }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Kategori:</strong> {{ bukuDetail.kategori }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Edisi:</strong> {{ bukuDetail.edisi }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Stok:</strong> {{ bukuDetail.qty }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Safety Stock:</strong> {{ bukuDetail.safety || 0 }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Harga:</strong> Rp {{ (bukuDetail.harga || 0).toLocaleString('id-ID') }}
+                        </div>
+                        <div class="info-group">
+                            <strong>Status:</strong> 
+                            <span :class="['status-badge', getStatusClass(bukuDetail)]">
+                               <i :class="getStatusIcon(bukuDetail)"></i>
+                                {{ getStatusText(bukuDetail) }}
+                            </span>
+                        </div>
+                        <div class="info-group" v-if="bukuDetail.catatanHTML">
+                            <strong>Catatan:</strong> <span v-html="bukuDetail.catatanHTML"></span>
+                        </div>
+                    </div>
+                    
+                    <button class="tombol-utama" @click="editStokBuku(bukuDetail)">Edit Stok</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="../js/services/api.js"></script>
+    <script src="../js/components/stok-app.js"></script>
+    
+    <script>
+        // Cek login
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (!loggedIn || loggedIn !== 'true') {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status-badge</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="status-badge-app">
+        <!-- Header -->
+        <header class="header">
+            <div class="judul-dashboard">
+                <h1>Status Badge Sistem</h1>
+                <h4>Kelola dan tampilkan status dengan badge yang informatif dan menarik.</h4>
+                <br><br>
+            </div>
+            <img src="../assets/logo UT.png" alt="Logo UT" class="logo-header">
+            <a href="../dashboard.html" class="tombol-kembali"><i class="fas fa-home"></i> Kembali ke dashboard</a>
+        </header>
+
+        <!-- Konten Utama -->
+        <main class="konten-dashboard">
+            <div class="konten-tracking">
+                <!-- Demo Status Badge -->
+                <div class="pencarian-tracking">
+                    <h2><i class="fas fa-tags"></i> Demo Status Badge</h2>
+                    
+                    <!-- Status Aktif -->
+                    <div class="info-pengiriman">
+                        <h3>Status Aktif Saat Ini</h3>
+                        <div class="status-badge-container">
+                            <span :class="['status-badge', badgeAktif.class]">
+                                <i :class="badgeAktif.ikon"></i>
+                                {{ badgeAktif.teks }}
+                            </span>
+                        </div>
+                        
+                        <div class="detail-actions">
+                            <button v-for="status in daftarStatus" :key="status.id" class="tombol-utama" @click="ubahStatus(status.teks, status.tipe)">
+                                <i :class="status.ikon"></i>
+                                {{ status.teks }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Semua Status Tersedia -->
+                    <div class="info-pengiriman">
+                        <h3>Semua Status Tersedia</h3>
+                        <div class="status-grid">
+                            <div v-for="status in daftarStatus" :key="status.id" :class="['status-item', getStatusClass(status.tipe)]">
+                                <div class="status-icon">
+                                    <i :class="status.ikon"></i>
+                                </div>
+                                <div class="status-info">
+                                    <h4>{{ status.teks }}</h4>
+                                    <p>Tipe: {{ status.tipe }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistik Status -->
+                    <div class="info-pengiriman">
+                        <h3>Statistik Status</h3>
+                        <div class="filter-section">
+                            <div class="stat-item">
+                                <span class="stat-angka">{{ statistikStatus.total }}</span>
+                                <span class="stat-label">Total Status</span>
+                            </div>
+                            <div class="stat-item status-aman">
+                                <span class="stat-angka">{{ statistikStatus.success }}</span>
+                                <span class="stat-label">Success</span>
+                            </div>
+                            <div class="stat-item status-menipis">
+                                <span class="stat-angka">{{ statistikStatus.warning }}</span>
+                                <span class="stat-label">Warning</span>
+                            </div>
+                            <div class="stat-item status-kosong">
+                                <span class="stat-angka">{{ statistikStatus.error }}</span>
+                                <span class="stat-label">Error</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-angka">{{ statistikStatus.info }}</span>
+                                <span class="stat-label">Info</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Badge Builder -->
+                    <div class="info-pengiriman">
+                        <h3><i class="fas fa-wrench"></i> Custom Badge Builder</h3>
+                        
+                        <div class="kelompok-input">
+                            <label for="custom-teks">Teks Badge:</label>
+                            <input type="text" id="custom-teks" v-model="customBadge.teks" placeholder="Masukkan teks untuk badge">
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="custom-tipe">Tipe Badge:</label>
+                            <select id="custom-tipe" v-model="customBadge.tipe">
+                                <option value="success">Success</option>
+                                <option value="warning">Warning</option>
+                                <option value="error">Error</option>
+                                <option value="info">Info</option>
+                                <option value="default">Default</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="custom-ikon">Ikon Badge:</label>
+                            <select id="custom-ikon" v-model="customBadge.ikon">
+                                <option value="fa-check-circle">Check Circle</option>
+                                <option value="fa-exclamation-triangle">Exclamation Triangle</option>
+                                <option value="fa-times-circle">Times Circle</option>
+                                <option value="fa-info-circle">Info Circle</option>
+                                <option value="fa-spinner">Spinner</option>
+                                <option value="fa-clock">Clock</option>
+                                <option value="fa-sync">Sync</option>
+                            </select>
+                        </div>
+
+                        <!-- Preview Custom Badge -->
+                        <div class="preview-section">
+                            <h4>Preview:</h4>
+                            <span :class="['status-badge', customBadgeClass]">
+                                <i :class="'fas ' + customBadge.ikon"></i>
+                                {{ customBadge.teks || 'Custom Badge' }}
+                            </span>
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="tombol-utama" @click="tambahCustomBadge">
+                                <i class="fas fa-plus"></i> Tambah ke Daftar
+                            </button>
+                            <button class="tombol-keluar" @click="resetCustomBadge">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Daftar Custom Badge -->
+                    <div v-if="customBadges.length > 0" class="info-pengiriman">
+                        <h3><i class="fas fa-list"></i> Custom Badges Anda</h3>
+                        <div class="status-grid">
+                            <div v-for="(badge, index) in customBadges" :key="'custom-' + index" :class="['status-item', getStatusClass(badge.tipe)]">
+                                <div class="status-icon">
+                                    <i :class="badge.ikon"></i>
+                                </div>
+                                <div class="status-info">
+                                    <h4>{{ badge.teks }}</h4>
+                                    <p>Tipe: {{ badge.tipe }}</p>
+                                </div>
+                                <button 
+                                    class="tombol-keluar"
+                                    @click="hapusCustomBadge(index)"
+                                    style="padding: 5px 10px; margin-left: 10px;"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kode Implementasi -->
+                    <div class="info-pengiriman">
+                        <h3><i class="fas fa-code"></i> Cara Implementasi</h3>
+                        <div class="code-example">
+                            <h4>Contoh Penggunaan:</h4>
+                            <div class="detail-info-section">
+                                <p><strong>HTML:</strong></p>
+                                <pre><code>&lt;span class="status-badge badge-success"&gt;
+    &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt;
+    Stok Aman
+&lt;/span&gt;</code></pre>
+                                
+                                <p><strong>Class Tersedia:</strong></p>
+                                <div class="info-group">
+                                    <span><code>.badge-success</code></span>
+                                    <span class="status-aman">Untuk status berhasil/aman</span>
+                                </div>
+                                <div class="info-group">
+                                    <span><code>.badge-warning</code></span>
+                                    <span class="status-menipis">Untuk status peringatan/menipis</span>
+                                </div>
+                                <div class="info-group">
+                                    <span><code>.badge-error</code></span>
+                                    <span class="status-kosong">Untuk status error/kosong</span>
+                                </div>
+                                <div class="info-group">
+                                    <span><code>.badge-info</code></span>
+                                    <span>Untuk status informasi/proses</span>
+                                </div>
+                                <div class="info-group">
+                                    <span><code>.badge-default</code></span>
+                                    <span>Untuk status default</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/services/api.js"></script>
+    <script src="../js/components/status-badge-app.js"></script>
+    <script>
+        // Cek login
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (!loggedIn || loggedIn !== 'true') {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>
